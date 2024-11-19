@@ -1,3 +1,11 @@
+/*
+ * Exemplo compilação 
+ * 
+ * Compilar: gcc ex1-3.c
+ * Executar: a.out demo_file.txt
+ */
+
+
 #include <stdio.h>
 #define LINE_LEN 512												//512 caracteres de armazenamento da linha
 
