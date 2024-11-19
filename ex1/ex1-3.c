@@ -1,9 +1,9 @@
 #include <stdio.h>
-#define LINE_STRO 512												//512 caracteres de armazenamento da linha
+#define LINE_LEN 512												//512 caracteres de armazenamento da linha
 
 
 int processFile(const char * filename, int (*action)(const char * line, void * context), void * context){
-	char line_buffer[LINE_STRO];
+	char line_buffer[LINE_LEN];
 	int accumulator = 0;
 	FILE* file = fopen(filename, "r");									//abertura o ficheiro
 	
