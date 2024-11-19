@@ -29,7 +29,7 @@ int lineFilterPrint(const char * line, void * context){
 	separatorUnify(line_copy);
 	
 	//comparar strings e retornar
-	if(strcmp(line_copy, context) == 0){
+	if(strcmp_ic(line_copy, context) == 0){
 		printf("%s", line);
 		return 1;
 	}
