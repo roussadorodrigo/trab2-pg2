@@ -1,72 +1,19 @@
 /*
  * Exemplo compilação 
  * 
- * Compilar: gcc ex1-5.c
- * Executar: a.out demo_file2.txt  batata
+ * Compilar: gcc SE1_func.c -c
+ * 			 gcc ex1-5.c -c
+ * 			 gcc SE1_func.o ex1-5.o
+ * Executar: a.out demo_file2.txt  cebola
  */
 
 
 #include <stdio.h>
 #include <ctype.h>
 #include <string.h>
-//#include "ex1-4_func.h"
+#include "SE1_func.h"
 
 #define LINE_LEN 512 //511 caracteres úteis e 1 para o terminador
-
-
-
-
-
-
-
-
-///////////////////////////////////////// FUNÇÕES SE1
-char *splitField(char *str) {
-    for (int i = 0; str[i] != '\n' && str[i] != '\0'; i++) {
-        if (str[i] == ';') {
-            str[i] = '\0';
-            return &str[i + 1];
-        }
-    }
-    return NULL;
-}
-
-
-
-void separatorUnify(char str[]) {
-    int i = 0, space_before = 0, j = 0;
-
-    while (isspace(str[i])) {
-        i++;
-    }
-
-    while (str[i] != '\0') {
-        if (isspace(str[i])) {
-            if (!space_before) {
-                str[j++] = ' ';
-                space_before = 1;
-            }
-        } else {
-            str[j++] = str[i];
-            space_before = 0;
-        }
-        i++;
-    }
-
-    if (j > 0 && str[j - 1] == ' ') {
-        j--;
-    }
-    str[j] = '\0';
-}
-/////////////////////////////////////////
-
-
-
-
-
-
-
-
 
 
 
