@@ -1,0 +1,4 @@
+batata;carne
+cebola;manteiga
+966;comboio
+suburbano;Lisboa
