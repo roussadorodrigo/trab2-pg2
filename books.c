@@ -168,19 +168,22 @@ int fillBookData(BookData * b, const char * line){
 	
 	//fazer uma cópia de line
 	char line_copy[LINE_LEN];
+	char string_aux[LINE_LEN];
 	strcpy(line_copy, line);
 	
 	unsplit_line = splitField(line_copy); //obtenção do título
 	if(!unsplit_line)return 0;			  //verificação do pointer
+	separatorUnify(line_copy);
 	
-	strcpy(b->title,line_copy);			  //preenchimento do título
+	strcpy(b->title, line_copy);		  //preenchimento do título
 	
 	int i;	  							  //preenchimento de line_copy com o resto da linha
 	for(i = 0; unsplit_line[i] != '\0'; i++)line_copy[i] = unsplit_line[i];
-	
+
 	
 	unsplit_line = splitField(line_copy); //preenchimento do isbn
 	if(!unsplit_line)return 0;
+	separatorUnify(line_copy);
 	strcpy(b->isbn,line_copy);
 
 	for(i = 0; unsplit_line[i] != '\0'; i++)line_copy[i] = unsplit_line[i];
@@ -191,6 +194,7 @@ int fillBookData(BookData * b, const char * line){
 	
 	unsplit_line = splitField(line_copy); //preenchimento do authors
 	if(!unsplit_line)return 0;
+	separatorUnify(line_copy);
 	strcpy(b->authors,line_copy);
 
 	for(i = 0; unsplit_line[i] != '\0'; i++)line_copy[i] = unsplit_line[i];
@@ -198,6 +202,7 @@ int fillBookData(BookData * b, const char * line){
 	
 	unsplit_line = splitField(line_copy); //preenchimento do publisher
 	if(!unsplit_line)return 0;
+	separatorUnify(line_copy);
 	strcpy(b->publisher,line_copy);
 	
 	for(i = 0; unsplit_line[i] != '\0'; i++)line_copy[i] = unsplit_line[i];
@@ -207,28 +212,24 @@ int fillBookData(BookData * b, const char * line){
 
 
 int collAddBook(const char * line, void * context){
-	BookData b;
-	BookData * b_ptr;
 	
 	Collection * p = (Collection *)context; //ponteiro auxiliar (para a collection)
 	
 	//verificar se há espaço para o novo elemento
 	if(p->count == MAX_BOOKS)return 0;
 	
-	//verificar se a informação é válida (e preencher a nova estrutura)
-	if(fillBookData(b_ptr, line) == 0)return 0;
-	
+	//verificar se a informação é válida
+	if(fillBookData(&(p->books[p->count]), line) == 0)return 0;
 	//preencher a estrutura com o novo elemento
-	p->books[p->count] = b;
 	p->refs[p->count] = NULL;
 	p->count++;
-
 	return 1;
 }
 
 
 void collSortTitle(Collection * col){
-	qsort(col->books, col->count, sizeof(BookData), (int (*) (const void *, const void *))title_cmp);
+	if(col == NULL || col->count == 0)printf("ERRO - a collection não existe ou está vazia!");
+	else{qsort(col->books, col->count, sizeof(BookData), (int (*) (const void *, const void *))title_cmp);}	
 }
 
 
