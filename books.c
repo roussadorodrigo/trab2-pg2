@@ -26,7 +26,7 @@ static int lenght(const char *str){
 }
 
 
-static int strcmp_ic(const char *str1, const char *str2){
+int strcmp_ic(const char *str1, const char *str2){
 	char str1_low[lenght(str1)];
 	char str2_low[lenght(str2)];
 	int i = 0; //variável para percorrer str1
