@@ -6,7 +6,7 @@
 #define MAX_BOOKS 310 //MAX_BOOKS coincide com o número máximo de linhas!
 #define MAX_LINE_WIDTH 450
 #define MAX_TITLE 220
-#define SIZE_ISBN 20
+#define SIZE_ISBN 9
 #define MAX_AUTHORS 100
 #define MAX_PUB_NAME 70
 
@@ -31,7 +31,7 @@ void separatorUnify(char str[]);
 /******/
 
 static int title_cmp(const BookData * b1, const BookData * b2);
-static int isbn_cmp(const BookData * b1, const BookData * b2);
+int isbn_cmp(const BookData * b1, const BookData * b2);
 
 int processFile(const char * filename, int (*action)(const char * line, void * context), void * context);
 int linePrintRaw(const char * line, void * context);
