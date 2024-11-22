@@ -34,7 +34,7 @@ int main(int argc, char * argv[]){
 				return 0;
 				
 			default:
-				printf("\nInvalid command\n");
+				printf("Invalid command\n");
 				continue;
 			
 		}
