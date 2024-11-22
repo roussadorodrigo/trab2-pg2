@@ -68,7 +68,7 @@ int strcmp_ic(const char *str1, const char *str2){
 }
 
 
-static void separatorUnify(char str[]){
+void separatorUnify(char str[]){
 	int i = 0; 				//Variável que percorre a string
 	int space_before = 0;	//Variável que diz se há espaço anteiror (=1) ou não (=0)
 	int j = 0;
