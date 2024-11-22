@@ -27,7 +27,7 @@ typedef struct{
 static char *splitField(char *str);
 static int lenght(const char *str);
 int strcmp_ic(const char *str1, const char *str2);
-static void separatorUnify(char str[]);
+void separatorUnify(char str[]);
 /******/
 
 static int title_cmp(const BookData * b1, const BookData * b2);
