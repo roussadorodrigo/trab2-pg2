@@ -107,7 +107,7 @@ static int title_cmp(const BookData * b1, const BookData * b2){
 }
 
 
-static int isbn_cmp(const BookData * b1, const BookData * b2){
+int isbn_cmp(const BookData * b1, const BookData * b2){
 	return strcmp_ic(b1->isbn, b2->isbn);
 }
 
