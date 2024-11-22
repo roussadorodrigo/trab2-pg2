@@ -26,7 +26,7 @@ typedef struct{
 /***FUNCOES SE1***/
 static char *splitField(char *str);
 static int lenght(const char *str);
-static int strcmp_ic(const char *str1, const char *str2);
+int strcmp_ic(const char *str1, const char *str2);
 static void separatorUnify(char str[]);
 /******/
 
