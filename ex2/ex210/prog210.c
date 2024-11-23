@@ -12,7 +12,7 @@ int main(int argc, char * argv[]){
 		return 1;
 	}
 	
-	printf("The valid commands are:\n l - show all books \n q - exit\n");
+	printf("The valid commands are:\n l - show all books \n q - exit\n i - show with ISBN \n a - show with author\n");
 	
 	while(1){
 		
