@@ -1,5 +1,4 @@
 #include <stdio.h>
-
 #include "books.h"
 
 Collection col;
