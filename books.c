@@ -235,7 +235,7 @@ void collSortTitle(Collection * col){
 
 void collSortRefIsbn(Collection * col){
 	//iniciar o array refs (com a ordem do array books)
-	for(int i = 0; i <= col->count; i++){
+	for(int i = 0; i < col->count; i++){
 		col->refs[i] = &(col->books[i]);
 	}
 	
