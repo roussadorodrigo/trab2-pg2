@@ -10,23 +10,24 @@ Collection * col_ptr = &col;
 
 int main(int argc, char * argv[]){
 	char input[LINE_LEN];
-	char * isbn;
-	BookData * elem;
+	char* isbn;
+	int check_isbn = 0;
 	
-	if(processFile(argv[1], collAddBook, col_ptr) == -1){
+	if(processFile(argv[1], collAddBook, col_ptr) == -1){				//Processamento de ficheiro
 		return 1;
 	}
 	
-	collSortTitle(col_ptr);
-	collSortRefIsbn(col_ptr);
+	collSortTitle(col_ptr);												//ordem alfabetica dos titulos
+	collSortRefIsbn(col_ptr);											//ordem crescente dos ISBN dos livros
 	
 	printf("The valid commands are:\n l - show all books \n q - exit\n i isbn - searches for the book by isbn\n");
 	
 	while(1){
 		
-		scanf("%s", input);
+		fgets(input, sizeof(input), stdin);								// fazendo com fgets já não dá loop infinito 
+		separatorUnify(input);											//uniformização de espaços
 		
-		switch(input[0]){
+		switch(input[0]){												
 			case 'l':
 				for(int i = 0; i <= col_ptr->count-1; i++){
 				printf("TITLE: %s | ", col_ptr->books[i].title);
@@ -38,24 +39,22 @@ int main(int argc, char * argv[]){
 				
 				
 			case 'i':
-				
-				
-				separatorUnify(input);
-				
-				strtok(input, " ");
 				isbn = strtok(input, " ");
-				
-				printf("%s\n", isbn);
-				elem = bsearch(isbn, col_ptr->refs, col_ptr->count, SIZE_ISBN, (int (*) (const void *, const void *))isbn_cmp);
-				if(!elem)
-					printf("ISBN not found\n");
-				else{
-					printf("TITLE: %s | ", elem->title);
-					printf("ISBN: %s | ", elem->isbn);
-					printf("AUTHORS: %s | ", elem->authors);
-					printf("PUBLISHER: %s\n\n", elem->publisher);
+				isbn = strtok(NULL, " ");
+
+				for(int i = 0; i < (col_ptr->count); i++){
+					if(strcmp_ic(col_ptr->refs[i]->isbn, isbn) == 0){
+					
+						printf("TITLE: %s | ", col_ptr->books[i].title);
+						printf("ISBN: %s | ", col_ptr->books[i].isbn);
+						printf("AUTHORS: %s | ", col_ptr->books[i].authors);
+						printf("PUBLISHER: %s\n", col_ptr->books[i].publisher);
+						check_isbn = 1;
+						break;
+					}
 				}
-				
+				if(check_isbn == 0)printf("Book not found\n");
+						
 				break;
 				
 			case 'q':
