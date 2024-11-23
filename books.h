@@ -3,12 +3,12 @@
 
 #define LINE_LEN 512
 
-#define MAX_BOOKS 310 //MAX_BOOKS coincide com o número máximo de linhas!
-#define MAX_LINE_WIDTH 450
-#define MAX_TITLE 220
-#define SIZE_ISBN 9
-#define MAX_AUTHORS 100
-#define MAX_PUB_NAME 70
+#define MAX_BOOKS 296 //MAX_BOOKS coincide com o número máximo de linhas!
+#define MAX_LINE_WIDTH 435
+#define MAX_TITLE 200
+#define SIZE_ISBN 10
+#define MAX_AUTHORS 92
+#define MAX_PUB_NAME 51
 
 typedef struct book { 
  char title[MAX_TITLE]; 
