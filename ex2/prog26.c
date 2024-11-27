@@ -2,10 +2,12 @@
 
 #include "books.h"
 
-Collection col;
-Collection * col_ptr = &col;
-
 int main(int argc, char * argv[]){
+	
+	Collection col;
+	Collection * col_ptr = &col;
+	col_ptr->count = 0;
+	
 	char input[LINE_LEN];
 	
 	if(processFile(argv[1], collAddBook, col_ptr) == -1){				//Processamento de ficheiro
