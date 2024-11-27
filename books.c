@@ -22,7 +22,7 @@ static int lenght(const char *str){
 	int counter = 0; //Variavel para contar quantos elementos tem no array
 	for(int i = 0; str[i] != '\0'; i++)
 		counter ++;
-	return counter;
+	return (counter+1);
 }
 
 
