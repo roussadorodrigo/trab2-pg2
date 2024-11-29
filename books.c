@@ -22,7 +22,7 @@ static int lenght(const char *str){
 	int counter = 0; //Variavel para contar quantos elementos tem no array
 	for(int i = 0; str[i] != '\0'; i++)
 		counter ++;
-	return (counter+1);
+	return (counter+1);			/////////////////////////////////////////////// +1 - contar '\0' no final do campo 
 }
 
 
@@ -107,7 +107,10 @@ static int title_cmp(const BookData * b1, const BookData * b2){
 }
 
 
-int isbn_cmp(const BookData * b1, const BookData * b2){
+int isbn_cmp(const BookData * pb1, const BookData * pb2){
+	BookData *b1 = *(BookData**)pb1;
+	BookData *b2 = *(BookData**)pb2;
+	
 	return strcmp_ic(b1->isbn, b2->isbn);
 }
 
@@ -268,3 +271,4 @@ int bookContainsAuthor(BookData * b, const char * word){
 	
 	return 0;
 }
+
