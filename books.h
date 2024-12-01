@@ -43,4 +43,5 @@ int collAddBook(const char * line, void * context);
 void collSortTitle(Collection * col);
 void collSortRefIsbn(Collection * col);
 int bookContainsAuthor(BookData * b, const char * word);
+	
 #endif
