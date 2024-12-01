@@ -4,7 +4,7 @@
 #define LINE_LEN 512
 
 #define MAX_BOOKS 296 //MAX_BOOKS coincide com o número máximo de linhas!
-#define MAX_LINE_WIDTH 435
+#define MAX_LINE_WIDTH 435+1
 #define MAX_TITLE 200+1
 #define SIZE_ISBN 10+1
 #define MAX_AUTHORS 92+1
@@ -25,13 +25,15 @@ typedef struct{
 
 /***FUNCOES SE1***/
 static char *splitField(char *str);
-static int lenght(const char *str);
+int lenght(const char *str);
 int strcmp_ic(const char *str1, const char *str2);
 void separatorUnify(char str[]);
 /******/
 
 static int title_cmp(const BookData * b1, const BookData * b2);
 int isbn_cmp(const BookData * b1, const BookData * b2);
+BookData *find_book_by_isbn(const char *search_isbn, Collection *col);	// Função nova, a tal do bsearch
+
 
 int processFile(const char * filename, int (*action)(const char * line, void * context), void * context);
 int linePrintRaw(const char * line, void * context);
@@ -41,5 +43,4 @@ int collAddBook(const char * line, void * context);
 void collSortTitle(Collection * col);
 void collSortRefIsbn(Collection * col);
 int bookContainsAuthor(BookData * b, const char * word);
-
 #endif
