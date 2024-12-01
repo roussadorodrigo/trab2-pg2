@@ -1,5 +1,3 @@
-/*Este programa consegue encontrar os livros por isbn no ficheiro "dados_3livros.csv" mas não no ficheiro "dados.csv"*/
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
@@ -7,84 +5,77 @@
 
 #include "books.h"
 
+
+
 int main(int argc, char * argv[]){
 	
 	Collection col;
 	col.count = 0;
+	char input[LINE_LEN];												// Array onde vai ficar o input do programa
+	char* isbn;															// String que tem o isbn apenas proveniente do "Array de input"
 	
-	BookData * search_isbn;
 	
-	BookData * matching_isbn;
+	if(processFile(argv[1], collAddBook, &col) == -1) return 1;			// Processamento de ficheiro
 	
-	char input[LINE_LEN];
-	char* isbn;
-	int check_isbn = 0;
-	
-	if(processFile(argv[1], collAddBook, &col) == -1){				//Processamento de ficheiro
-		return 1;
-	}
-	
-	collSortTitle(&col);												//ordem alfabetica dos titulos
-	collSortRefIsbn(&col);												//ordem crescente dos ISBN dos livros
+	collSortTitle(&col);												// Ordem alfabetica dos titulos
+	collSortRefIsbn(&col);												// Ordem crescente dos ISBN dos livros
 								
 	
-	printf("The valid commands are:\n l - show all books \n q - exit\n i isbn - searches for the book by isbn\n");
-	
+	printf(" The valid commands are:\n l - show all books \n q - exit\n i isbn - searches for the book by isbn\n\n ");
 	while(1){
 		
-		fgets(input, sizeof(input), stdin);								// fazendo com fgets já não dá loop infinito 
-		separatorUnify(input);											//uniformização de espaços
 		
-		switch(input[0]){												
-			case 'l':
+		
+		fgets(input, sizeof(input), stdin);								// Leitura do input do programa 
+		separatorUnify(input);											// Uniformização de espaços do input, para ter formatação certa 
+		
+		
+		
+		
+		if((lenght(input) > 2) && (input[1] != ' ')){					/// If de verificar espaço entre "comando" e "palavra" no INPUT, senão segmentation fault;   maior que 2 porque o lenght conta com o \0;   
+			printf("\n Invalid input, please input a space between the command and the word/number\n\n ");
+			continue;
+		}
+		
+	
+	
+		switch(input[0]){	
+			default:													///Comandos inválidos
+				printf("\n Invalid command\n\n ");
+				continue;
+				
+															
+			case 'l':													/// Comando l
 				for(int i = 0; i <= col.count-1; i++){
-				printf("TITLE: %s | ", col.books[i].title);
+				printf("\n TITLE: %s | ", col.books[i].title);
 				printf("ISBN: %s | ", col.books[i].isbn);
 				printf("AUTHORS: %s | ", col.books[i].authors);
-				printf("PUBLISHER: %s\n\n", col.books[i].publisher);
+				printf("PUBLISHER: %s\n\n ", col.books[i].publisher);
 				}
 				break;
 				
 				
-				
-				
-				
-			case 'i':
+			case 'i':													/// Comando i
 				isbn = strtok(input, " ");
 				isbn = strtok(NULL, " ");
 				
-				strcpy(search_isbn->isbn,isbn);
+				BookData* matching_isbn = find_book_by_isbn(isbn, &col);// Função nova já está no books.h e books.c
 				
-				matching_isbn = (BookData *) bsearch(search_isbn, &col.refs, col.count, sizeof(BookData *), (int (*) (const void *, const void *))isbn_cmp);
-				printf("->> %p\n", matching_isbn);
 				if(matching_isbn != NULL){
-					
-					printf("TITLE: %s | ", matching_isbn->title);
+					printf("\n TITLE: %s | ", matching_isbn->title);
 					printf("ISBN: %s | ", matching_isbn->isbn);
 					printf("AUTHORS: %s | ", matching_isbn->authors);
-					printf("PUBLISHER: %s\n", matching_isbn->publisher);
+					printf("PUBLISHER: %s\n\n ", matching_isbn->publisher);
 					continue;
-					}
+				}
 				
-				printf("Book not found\n");
-						
+				printf("\n Book not found\n\n ");
 				break;
 				
 				
-				
-				
-				
-			case 'q':
-				printf("Exiting the program\n");
+			case 'q':													/// Comando q
+				printf("\n Exiting the program\n\n");
 				return 0;
-				
-			default:
-				printf("Invalid command\n");
-				continue;
-			
 		}
-		
 	}
-	
-	
 }
