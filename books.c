@@ -18,7 +18,7 @@ static char *splitField(char *str){
 }
 
 
-static int lenght(const char *str){
+int lenght(const char *str){
 	int counter = 0; //Variavel para contar quantos elementos tem no array
 	for(int i = 0; str[i] != '\0'; i++)
 		counter ++;
@@ -112,6 +112,19 @@ int isbn_cmp(const BookData * pb1, const BookData * pb2){
 	BookData *b2 = *(BookData**)pb2;
 	
 	return strcmp_ic(b1->isbn, b2->isbn);
+}
+
+
+
+BookData *find_book_by_isbn(const char *search_isbn, Collection *col) {
+	BookData key; // Create a temporary BookData for search
+	strcpy(key.isbn, search_isbn);
+
+	BookData *key_ptr = &key;
+	BookData **found = (BookData **)bsearch(&key_ptr, col->refs, col->count, sizeof(BookData *),(int (*) (const void *, const void *)) isbn_cmp);
+	
+	return found ? *found : NULL; // Dereference if found, return NULL otherwise
+	//return *found;				// Não pode ser, senão ele vai pedir o pedir o ponteiro de NULL e obviamente dá barraca
 }
 
 
@@ -271,4 +284,3 @@ int bookContainsAuthor(BookData * b, const char * word){
 	
 	return 0;
 }
-
