@@ -260,27 +260,35 @@ void collSortRefIsbn(Collection * col){
 }
 
 
-int bookContainsAuthor(BookData * b, const char * word){
-	char * token;
-	const char * break_character = " ";
-	
-	//criar uma cópia de b->authors
-	char authors_copy[MAX_AUTHORS];
-	for(int i = 0; b->authors[i]!='\0'; i++)authors_copy[i] = b->authors[i];
-	
-	//passar as vírgulas a espaços
-	for(int i = 0; authors_copy[i] != '\0'; i++)
-		if(authors_copy[i] = ',')
-			authors_copy[i] = ' ';
-	
-	//uniformizar a string
-	separatorUnify(authors_copy);
-	
-	token = strtok(authors_copy, break_character);
-	while(token != NULL){
-		if(strcmp_ic == 0)return 1;
-		token = strtok(NULL, break_character);
-	}
-	
-	return 0;
+int bookContainsAuthor(BookData *b, const char *word) {
+    char *token;
+    const char *break_character = " ";
+
+    // Create a copy of b->authors
+    char authors_copy[MAX_AUTHORS];
+    for (int i = 0; b->authors[i] != '\0'; i++) {
+        authors_copy[i] = b->authors[i];
+    }
+    authors_copy[strlen(b->authors)] = '\0'; // Null-terminate the string
+
+    // Replace commas with spaces
+    for (int i = 0; authors_copy[i] != '\0'; i++) {
+        if (authors_copy[i] == ',') { // Fixed comparison operator
+            authors_copy[i] = ' ';
+        }
+    }
+
+    // Unify separators (if needed)
+    separatorUnify(authors_copy);
+
+    // Tokenize and search for the author
+    token = strtok(authors_copy, break_character);
+    while (token != NULL) {
+        if (strcmp_ic(token, word) == 0) {
+            return 1; // Author found
+        }
+        token = strtok(NULL, break_character);
+    }
+
+    return 0; // Author not found
 }
