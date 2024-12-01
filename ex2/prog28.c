@@ -32,8 +32,8 @@ int main(int argc, char * argv[]){
 		
 		
 		
-		if((lenght(input) > 2) && (input[1] != ' ')){					/// If de verificar espaço entre "comando" e "palavra" no INPUT, senão segmentation fault;   maior que 2 porque o lenght conta com o \0;   
-			printf("\n Invalid input, please input a space between the command and the word/number\n\n ");
+		if((lenght(input) > 2) && (input[1] != ' ') && ( ((input[1] != 'i')) || ((input[1] != 'a')))){					/// If de verificar espaço entre "comando" e "palavra" no INPUT, senão segmentation fault;   maior que 2 porque o lenght conta com o \0;   
+			printf("\n Invalid input, please input a space between the command and the word/number\n\n ");				/// A ser melhorado, pode haver questões com comando de uma unica letra
 			continue;
 		}
 		
