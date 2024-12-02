@@ -31,7 +31,7 @@ typedef struct{
  int count; 			//quantidade de elementos preenchidos em books 
 } Collection;
 
-/*Funções usadas na SP1 - as suas descrições podem ser aí encontradas*/
+/**<Funções usadas na SP1 - as suas descrições podem ser aí encontradas*/
 static char *splitField(char *str);
 int lenght(const char *str);
 int strcmp_ic(const char *str1, const char *str2);
@@ -39,7 +39,6 @@ void separatorUnify(char str[]);
 
 
 /** 
- * @fn title_cmp
  * 
  * @brief função que compara alfabeticamente os campos "title" indicadas pelos pointers passados como parâmetros
  * 
@@ -53,8 +52,7 @@ void separatorUnify(char str[]);
 static int title_cmp(const BookData * b1, const BookData * b2);
 
 
-/** 
- * @fn isbn_cmp
+/**
  * 
  * @brief função que compara alfabeticamente os campos "isbn" indicadas pelos pointers passados como parâmetros
  * 
@@ -68,8 +66,7 @@ static int title_cmp(const BookData * b1, const BookData * b2);
 int isbn_cmp(const BookData * b1, const BookData * b2);
 
 
-/** 
- * @fn find_book_by_isbn
+/**
  * 
  * @brief função que, dado um isbn, procura o livro a que este corresponde
  * 
@@ -84,8 +81,7 @@ int isbn_cmp(const BookData * b1, const BookData * b2);
 BookData *find_book_by_isbn(const char *search_isbn, Collection *col);
 
 
-/** 
- * @fn processFile
+/**
  * 
  * @brief função que abre um ficheiro em modo de leitura e, a cada linha, aplica a função passada como parâmetro
  * 
@@ -99,8 +95,7 @@ BookData *find_book_by_isbn(const char *search_isbn, Collection *col);
 int processFile(const char * filename, int (*action)(const char * line, void * context), void * context);
 
 
-/** 
- * @fn linePrintRaw
+/**
  * 
  * @brief função que mostra no standard output o conteúdo integral do parâmetro line (sem alterações)
  * 
@@ -116,8 +111,7 @@ int processFile(const char * filename, int (*action)(const char * line, void * c
 int linePrintRaw(const char * line, void * context);
 
 
-/** 
- * @fn lineFilterPrint
+/**
  * 
  * @brief função que mostra no standard output o conteúdo integral do parâmetro line (sem alterações), se o primeiro
  *        campo deste (primeira palavra) for igual à string passada no parâmetro context
@@ -135,8 +129,7 @@ int linePrintRaw(const char * line, void * context);
 int lineFilterPrint(const char * line, void * context);
 
 
-/** 
- * @fn fillBookData
+/**
  * 
  * @brief função que, dada uma linha de texto (em formato csv), preenche uma estrutura BookData com os respetivos campos
  * 
@@ -148,8 +141,7 @@ int lineFilterPrint(const char * line, void * context);
 int fillBookData(BookData * b, const char * line);
 
 
-/** 
- * @fn collAddBook
+/**
  * 
  * @brief função que, dada uma estrutura BookData, a preenche e adiciona a uma estrutura Collection
  * 
@@ -165,8 +157,7 @@ int fillBookData(BookData * b, const char * line);
 int collAddBook(const char * line, void * context);
 
 
-/** 
- * @fn collSortTitle
+/**
  * 
  * @brief função que, dada uma estrutura Collection, ordena o conteúdo do campo books por ordem alfabética
  * 
@@ -177,8 +168,7 @@ int collAddBook(const char * line, void * context);
 void collSortTitle(Collection * col);
 
 
-/** 
- * @fn collSortRefIsbn
+/**
  * 
  * @brief função que, dada uma estrutura Collection, ordena o conteúdo do campo refs por ordem de isbn
  * 
@@ -191,8 +181,7 @@ void collSortTitle(Collection * col);
 void collSortRefIsbn(Collection * col);
 
 
-/** 
- * @fn bookContainsAuthor
+/**
  * 
  * @brief função que procura o nome passado como parâmetro no campo de autores da estrutura passada como
  *        parâmetro
